@@ -31,13 +31,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       ])
     });
 
-    this.route.queryParams.subscribe( (params: Params) => {
+    this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
 
       } else if (params['accessDenied']) {
-        
+
       }
-    } );
+    });
   }
 
   ngOnDestroy(): void {
