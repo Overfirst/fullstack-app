@@ -8,6 +8,7 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -21,9 +22,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
