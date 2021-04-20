@@ -23,7 +23,7 @@ export class AuthService {
       );
   }
 
-  private setToken(token: string): void {
+  public setToken(token: string): void {
     this.token = token;
   }
 
