@@ -1,14 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../shared/services/auth.service";
-import { Subscription } from "rxjs";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { MaterialService } from "../shared/classes/material.service";
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../shared/services/auth.service";
+import {Subscription} from "rxjs";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {MaterialService} from "../shared/classes/material.service";
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
   public form: FormGroup;

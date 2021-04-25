@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../shared/services/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -8,7 +8,8 @@ import { MaterialService } from "../shared/classes/material.service";
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  styleUrls: ['./register-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterPageComponent implements OnInit, OnDestroy {
   public form: FormGroup;
