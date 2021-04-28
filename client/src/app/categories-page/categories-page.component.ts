@@ -1,4 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CategoriesService } from "../shared/services/categories.service";
+import { Category } from "../shared/interfaces";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-categories-page',
@@ -7,10 +10,11 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesPageComponent implements OnInit {
+  categories$: Observable<Category[]>;
 
-  constructor() { }
+  constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
+    this.categories$ = this.categoriesService.fetch();
   }
-
 }
