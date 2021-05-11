@@ -53,14 +53,13 @@ module.exports.update = async function(request, response) {
     };
 
     try {
-
         const category = await Category.findOneAndUpdate(
             { _id: request.params.id },
             { $set: updated },
             { new: true }
         );
 
-
+        response.status(200).json(category);
     } catch (error) {
         errorHandler(response, error);
     }
