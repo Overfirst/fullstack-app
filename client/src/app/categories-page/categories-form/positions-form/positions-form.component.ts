@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import {PositionsService} from "../../../shared/services/positions.service";
 import {Position} from "../../../shared/interfaces";
-import {Materialnstance, MaterialService} from "../../../shared/classes/material.service";
+import {MaterialInstance, MaterialService} from "../../../shared/classes/material.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -26,7 +26,7 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   positions: Position[] = [];
   loading: boolean = false;
-  modal: Materialnstance;
+  modal: MaterialInstance;
   form: FormGroup;
   positionId = null;
 
