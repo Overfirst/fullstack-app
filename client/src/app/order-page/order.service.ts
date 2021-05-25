@@ -8,20 +8,38 @@ export class OrderService {
 
   add(position: Position): void {
     const orderPosition: OrderPosition = Object.assign({}, {
-      name: position.name,
-      cost: position.cost,
-      quantity: position.quantity,
-      _id: position._id
+        name: position.name,
+        cost: position.cost,
+        quantity: position.quantity,
+        _id: position._id
     });
 
-    this.list.push(orderPosition);
+    const candidate = this.list.find((p: OrderPosition) => p._id === position._id)
+
+    if (candidate) {
+      candidate.quantity += position.quantity;
+    } else {
+      this.list.push(orderPosition);
+    }
+
+    this.computePrice();
   }
 
-  remove(position: Position): void {
+  remove(orderPosition: OrderPosition): void {
+    const idx = this.list.findIndex(p => p._id === orderPosition._id);
 
+    this.list.splice(idx, 1);
+    this.computePrice();
   }
 
   clear(): void {
+    this.list = [];
+    this.price = 0;
+  }
 
+  private computePrice(): void {
+    this.price = this.list.reduce((total, item) => {
+     return total += item.quantity * item.cost;
+    }, 0);
   }
 }

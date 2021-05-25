@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
@@ -10,6 +10,9 @@ import {
 import {NavigationEnd, Router} from "@angular/router";
 import {Materialnstance, MaterialService} from "../shared/classes/material.service";
 import {OrderService} from "./order.service";
+import {Order, OrderPosition} from "../shared/interfaces";
+import {OrdersService} from "../shared/services/orders.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-order-page',
@@ -21,12 +24,16 @@ import {OrderService} from "./order.service";
 export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('modal') modalRef: ElementRef;
   modal: Materialnstance;
+  oSub: Subscription;
 
   isRoot = true;
+  pending = false;
 
   constructor(
     private router: Router,
-    private orderService: OrderService
+    public orderService: OrderService,
+    private ordersService: OrdersService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +46,7 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.modal.destroy();
+    this.oSub?.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -54,6 +62,29 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   submit(): void {
-    this.modal.close();
+    this.pending = true;
+
+    const order: Order = {
+      list: this.orderService.list.map(item => {
+        delete item._id;
+        return item;
+      })
+    };
+
+    this.oSub = this.ordersService.create(order).subscribe((newOrder: Order) => {
+        MaterialService.toast(`Заказ №${newOrder.order} был добавлен!`)
+        this.orderService.clear();
+      }, error => {
+        MaterialService.toast(error.error.message);
+      },
+      () => {
+        this.pending = false;
+        this.modal.close();
+        this.cdr.detectChanges();
+    });
+  }
+
+  removePosition(orderPosition: OrderPosition) {
+    this.orderService.remove(orderPosition);
   }
 }

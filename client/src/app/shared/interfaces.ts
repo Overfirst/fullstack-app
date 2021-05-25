@@ -1,5 +1,3 @@
-import {exitCodeFromResult} from "@angular/compiler-cli";
-
 export interface User {
   email: string;
   password: string;
@@ -37,5 +35,5 @@ export interface OrderPosition {
   name: string;
   cost: number;
   quantity: number;
-  id?: string;
+  _id?: string;
 }
