@@ -1,3 +1,5 @@
+import {exitCodeFromResult} from "@angular/compiler-cli";
+
 export interface User {
   email: string;
   password: string;
@@ -20,4 +22,20 @@ export interface Position {
   user?: string;
   category: string;
   _id?: string;
+  quantity?: number;
+}
+
+export interface Order {
+  date?: Date;
+  order?: number;
+  user?: string;
+  _id?: string;
+  list: OrderPosition[];
+}
+
+export interface OrderPosition {
+  name: string;
+  cost: number;
+  quantity: number;
+  id?: string;
 }
