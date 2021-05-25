@@ -43,3 +43,28 @@ export interface Filter {
   end?: Date;
   order?: number;
 }
+
+export interface OverviewPageItem {
+  percent: number;
+  compare: number;
+  yesterday: number;
+  isHigher: boolean;
+}
+
+export interface OverviewPage {
+  orders: OverviewPageItem;
+  gain: OverviewPageItem;
+}
+
+class AnalyticsChartItem {
+  gain: number;
+  order: number;
+  label: number;
+}
+
+export interface AnalyticsPage {
+  average: number;
+  chart: AnalyticsChartItem[];
+}
+
+
