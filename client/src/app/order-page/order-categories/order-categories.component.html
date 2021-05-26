@@ -6,7 +6,7 @@
       [routerLink]="['/order', category._id]"
     >
       <div class="center">
-        <img [src]="category.imageSrc" class="responsive-img order-img">
+        <img [src]="category.imageSrc" class="responsive-img order-img order-img-margin">
       </div>
       <div class="card-content center p10">
         <h5 class="m0">{{category.name}}</h5>
@@ -15,7 +15,7 @@
   </div>
   <ng-template #empty>
     <div class="center">
-      <h4>Вы не создали не одной категории!</h4>
+      <h4>Вы не создали ни одной категории!</h4>
     </div>
   </ng-template>
 </div>
